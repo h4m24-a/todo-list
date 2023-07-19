@@ -1,10 +1,10 @@
-import createTodoHomePage from './todo';
-import createTabs from './tabs';
+import createTask from './task';
+import createTabs from './dom';
 
 
 function initialLoad() {
     createTabs()
-    createTodoHomePage();
+    createTask();
 }
 
 
