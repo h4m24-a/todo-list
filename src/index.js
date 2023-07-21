@@ -1,7 +1,7 @@
 import './style.css';
 
 import createTasks from './tasks';
-import createUI from './ui';
+import createUI from './dom';
 import createProjects from './projects'
 
 

@@ -7,6 +7,15 @@
   padding: 0;
 }
 
+#content {
+  margin-left: 350px;
+  display: flex;
+}
+
+body {
+  background-color: ghostwhite;
+}
+
 
 .navDiv {
   display: flex;
@@ -18,23 +27,22 @@
   top: 0;
   bottom: 0;
   width: 350px;
-  background-color: ghostwhite;
+  background-color: #258ef0;
 }
 
 /* Style for each tab */
 .navText {
-  color: black;
+  color: #fff;
   text-decoration: none;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 24px;;
   font-family: "Poppins", Helvetica, sans-serif;
   cursor: pointer;
   padding: 8px;
 }
 
 .navText:hover {
-  background-color: #0083ff;
-  color: #dce4eb;
+  background-color: white;
+  color: black;
 }
 
 
@@ -57,30 +65,190 @@
 }
 
 
-.homeDiv {
+.main-content {
+  margin: 2rem;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 40px;
-  background-color: rgb(245, 244, 210);
-  height: 100%;
+  justify-content: center;
+  align-items: flex-start; /* Set the height of the mainContent div to the full viewport height */
 }
 
 
-.headline {
-  font-family: "Poppins", Courier, monospace;
-  font-size: 40px;
+/* CSS */
+.add-task-button{
+  appearance: button;
+  background-color: #000;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  overflow: visible;
+  padding: 12px 40px;
 }
 
-.heading {
-  font-family: "Poppins", Courier, monospace;
-  font-size: 40px;
-  color: red;
+.add-task-button:focus {
+  text-decoration: none;
+}
+
+.add-task-button:hover {
+  text-decoration: none;
+}
+
+.add-task-button:active {
+  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.add-task-button:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
 }
 
 
-.page-content {
+/*  ADD TASK FORM */
+.modal-content {
+  text-align: center;
+}
+
+/* Center the form elements and place each on its own line */
+.task-form {
   display: flex;
-  height: 100%;
-  background-color: greenyellow;
+	position: absolute;
+  top: 20%;
+  width: 20%;
+  padding: 60px;
+  background-image: linear-gradient(to bottom, #a3a0f8, #cd90e4, #eb81c5, #fb789f, #fb7878);
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.task-form label,
+.task-form input,
+.task-form textarea,
+.task-form select,
+.task-form button {
+  margin-bottom: 1rem;
+}
+
+/* Style the form elements */
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 18px;
+  font-family: "Rubik", Verdana;
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+input[type="date"] {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 18px;
+  font-family: "Rubik", Verdana;
+}
+
+/* Style the submit button with a different color */
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #3279d6;
+  color: white;
+  font-size: 20px;
+  font-family: "Rubik", Verdana;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #095bc7;
+}
+
+/* Center the modal close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+/* ADD PROJECT FORM */
+
+.project-form {
+  display: none;
+  position: fixed;
+  top: 45%;
+  left: 1%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 310px; /* Set the maximum width of the form */
+  width: 50%; /* Set the width of the form */
+}
+
+.project-form input,
+.project-form textarea,
+.project-form select,
+.project-form button {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.project-form button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.project-form .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1px;
+  cursor: pointer;
+}
+
+
+
+#addproject-button:hover {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
 }
