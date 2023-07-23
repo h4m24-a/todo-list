@@ -269,3 +269,8 @@ button[type="submit"]:hover {
   margin-top: 4rem;
   border: solid 2px red;
 }
+
+
+.project-items {
+  background-color: red;
+}
