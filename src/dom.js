@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+
+
 const createUI = () => {
   const content = document.querySelector("#content");
   const navDiv = document.createElement("div");
@@ -298,9 +300,12 @@ function addItemsToTask() {
   myTask.push(newTask);
 }
 
+
 const taskItemsDiv = document.createElement("div");
 taskItemsDiv.classList.add("task-items");
 taskDiv.appendChild(taskItemsDiv);
+
+
 
 // Render Tasks
 function renderTasks() {
@@ -335,6 +340,8 @@ function renderTasks() {
       <h2>${task.description}</h2>
       <p>${formattedDate}</p>
       <p>${task.priority}</p>
+      <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></button>
+      <button class="remove-button"><i class="fa-solid fa-trash fa-lg" style="color: #000000;"></i></button>
     `;
 
     taskItemsDiv.appendChild(taskItemDiv); 
@@ -350,6 +357,8 @@ taskForm.addEventListener("submit", function (event) {
   clearTaskForm();
 });
 
+
+
 // Clears form after Task is submitted
 function clearTaskForm() {
   document.querySelector('input[name="taskTitle"]').value = "";
@@ -358,6 +367,9 @@ function clearTaskForm() {
   document.querySelector('select[name="taskPriority"]').value = "Low";
   taskForm.style.display = "none";
 }
+
+
+// Remove Button
 
 
 
