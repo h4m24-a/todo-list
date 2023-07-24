@@ -407,16 +407,10 @@ function editTask(index) {
 
   // Remove the original task from the myTask array
   myTask.splice(index, 1);
-
-
-  // Submit button to save the edited task
-  projectForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    addItemsToTask();
-    renderTasks();
-    clearTaskForm();
-  });
 }
+
+
+
 
 renderTasks();
 
