@@ -275,9 +275,18 @@ class Task {
 
 
 // Example Tasks
-
-const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low"  );
+  const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low"  );
   myTask.push(task1);
+
+  const task2 = new Task("Task 2", "Task 2 Description", "2023-07-01", "Medium"  );
+  myTask.push(task2)
+
+  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-01", "High"  );
+  myTask.push(task3)
+
+
+
+
 
 function addItemsToTask() {
   let title = document.querySelector('input[name="taskTitle"]').value;
@@ -301,6 +310,20 @@ function renderTasks() {
     let taskItemDiv = document.createElement("div");
     taskItemDiv.classList.add("task-item"); 
 
+    // Set the color based on the priority level
+    let color;
+    if (task.priority === "Low") {
+      color = "#d1eaee";
+    } else if (task.priority === "Medium") {
+      color = "#fedada";
+    } else if (task.priority === "High") {
+      color = "#EA5457";
+    } else {
+      color = "white"; // Default color if priority level is not recognized
+    }
+
+    taskItemDiv.style.backgroundColor = color;
+
     taskItemDiv.innerHTML = 
     ` <h1>${task.title}</h1>
       <h2>${task.description}</h2>
@@ -311,6 +334,7 @@ function renderTasks() {
     taskItemsDiv.appendChild(taskItemDiv); 
   }
 }
+
 
 // Submit button
 taskForm.addEventListener("submit", function (event) {
