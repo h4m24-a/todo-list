@@ -21,7 +21,6 @@ const createUI = () => {
   projectText.setAttribute("id", "project-button");
   addProjectButton.setAttribute("id", "addproject-button");
 
- 
   // Setting classes
   allTasks.classList.add("navText");
   thisWeek.classList.add("navText");
@@ -36,7 +35,6 @@ const createUI = () => {
   projectText.textContent = "Projects";
   addProjectButton.textContent = "+ Add Project";
 
-  
   content.appendChild(navDiv);
   content.appendChild(navbar);
   navDiv.appendChild(taskText);
@@ -45,7 +43,6 @@ const createUI = () => {
   navDiv.appendChild(upcoming);
   navDiv.appendChild(projectText);
   navDiv.appendChild(addProjectButton);
-  
 
   navbar.appendChild(taskText);
   navbar.appendChild(allTasks);
@@ -146,118 +143,112 @@ const createUI = () => {
 
 
 
+
+
   // PROJECT FORM MODAL
 
-const projectForm = document.createElement("form");
-projectForm.classList.add("project-form");
-projectForm.style.display = "none";
-
-const projectCloseButton = document.createElement("span");
-projectCloseButton.textContent = "×";
-projectCloseButton.classList.add("close");
-projectCloseButton.id = "closeProjectModal";
-
-const projectTitleInput = document.createElement("input");
-projectTitleInput.type = "text";
-projectTitleInput.name = "projectTitle";
-projectTitleInput.placeholder = "Project Title";
-
-
-const projectSubmitButton = document.createElement("button");
-projectSubmitButton.type = "submit";
-projectSubmitButton.textContent = "Add Project";
-
-// Add form elements to the form
-projectForm.appendChild(projectCloseButton);
-projectForm.appendChild(projectTitleInput);
-projectForm.appendChild(projectSubmitButton);
-
-// Append the project form to the mainContent div
-mainContent.appendChild(projectForm);
-
-// Toggle the project form visibility on button click
-addProjectButton.addEventListener("click", () => {
-  projectForm.style.display = "block";
-});
-
-projectCloseButton.addEventListener("click", () => {
+  const projectForm = document.createElement("form");
+  projectForm.classList.add("project-form");
   projectForm.style.display = "none";
-});
 
-// const taskDiv = document.createElement("div");
-// taskDiv.classList.add("taskDiv");
+  const projectCloseButton = document.createElement("span");
+  projectCloseButton.textContent = "×";
+  projectCloseButton.classList.add("close");
+  projectCloseButton.id = "closeProjectModal";
+
+  const projectTitleInput = document.createElement("input");
+  projectTitleInput.type = "text";
+  projectTitleInput.name = "projectTitle";
+  projectTitleInput.placeholder = "Project Title";
+
+  const projectSubmitButton = document.createElement("button");
+  projectSubmitButton.type = "submit";
+  projectSubmitButton.textContent = "Add Project";
+
+  // Add form elements to the form
+  projectForm.appendChild(projectCloseButton);
+  projectForm.appendChild(projectTitleInput);
+  projectForm.appendChild(projectSubmitButton);
+
+  // Append the project form to the mainContent div
+  mainContent.appendChild(projectForm);
+
+  // Toggle the project form visibility on button click
+  addProjectButton.addEventListener("click", () => {
+    projectForm.style.display = "block";
+  });
+
+  projectCloseButton.addEventListener("click", () => {
+    projectForm.style.display = "none";
+  });
 
 
 
 
 
-// ADD PROJECT FUNCTION
+  // ADD PROJECT FUNCTION
 
-let myProject = [];
+  let myProject = [];
 
-class Project {
-  constructor(title) {
-    this.title = title;
+  class Project {
+    constructor(title) {
+      this.title = title;
+    }
   }
-}
-
-function addItemToProject() {
-  let title = document.querySelector('input[name="projectTitle"]').value;
-  let newProject = new Project(title);
-  myProject.push(newProject);
-}
 
 
 
-const project1 = new Project("Grocery");
-myProject.push(project1);
+  function addItemToProject() {
+    let title = document.querySelector('input[name="projectTitle"]').value;
+    let newProject = new Project(title);
+    myProject.push(newProject);
+    projectForm.style.display = "none";
+  }
 
-  // Create and append a new div to hold project items
+
+
+  const project1 = new Project("Grocery");
+  myProject.push(project1);
+
+  const project2 = new Project("Chores");
+  myProject.push(project2);
+
+
+
   const projectItemsDiv = document.createElement("div");
-  projectItemsDiv.classList.add("project-items"); // Add the "project-items" class for identification
+  projectItemsDiv.classList.add("project-items");
   navDiv.appendChild(projectItemsDiv);
-
 
   function renderProjects() {
     // Get the projectItemsDiv from the DOM
     const projectItemsDiv = document.querySelector(".project-items");
-
-    // Clear the existing project items from the projectItemsDiv
-    while (projectItemsDiv.firstChild) {
-      projectItemsDiv.removeChild(projectItemsDiv.firstChild);
-    }
-
-    // Append a new div for each project
-    myProject.forEach((project) => {
-      const newProjectDiv = document.createElement("div");
-      newProjectDiv.classList.add("navText");
-      newProjectDiv.textContent = project.title;
-      projectItemsDiv.appendChild(newProjectDiv);
-    });
+    projectItemsDiv.innerHTML = myProject
+      .map((project) => `<div class="navText">${project.title}</div>`)
+      .join("");
   }
 
 
 
+  // Submit button
+  projectForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    addItemToProject();
+    renderProjects();
+    projectForm.reset();
+  });
 
 
-// Submit button
-projectSubmitButton.addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent the default form submission behavior
-  addItemToProject();
-  document.getElementById("projectForm").reset();
-});
-
-renderProjects();
+  renderProjects();
 
 
-content.appendChild(mainContent);
-// content.appendChild(taskDiv)
-  
-
-  
 
 
-}
+  // Add Task Function 
+  const taskDiv = document.createElement("div");
+  taskDiv.classList.add("taskDiv");
+
+  content.appendChild(mainContent);
+  content.appendChild(taskDiv)
+};
+
 export default createUI;
-
-
