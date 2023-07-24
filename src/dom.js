@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 const createUI = () => {
   const content = document.querySelector("#content");
   const navDiv = document.createElement("div");
@@ -281,7 +282,7 @@ class Task {
   const task2 = new Task("Task 2", "Task 2 Description", "2023-07-01", "Medium"  );
   myTask.push(task2)
 
-  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-01", "High"  );
+  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-15", "High"  );
   myTask.push(task3)
 
 
@@ -323,11 +324,16 @@ function renderTasks() {
     }
 
     taskItemDiv.style.backgroundColor = color;
+    
+
+    // Date format
+    const formattedDate = format(new Date(task.date), "MMM do - yyyy");
+
 
     taskItemDiv.innerHTML = 
     ` <h1>${task.title}</h1>
       <h2>${task.description}</h2>
-      <p>${task.date}</p>
+      <p>${formattedDate}</p>
       <p>${task.priority}</p>
     `;
 

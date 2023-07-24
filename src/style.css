@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 * {
   box-sizing: border-box;
@@ -9,7 +10,7 @@
 }
 
 #content {
-  margin-left: 310px;
+  margin-left: 290px;
 }
 
 
@@ -277,20 +278,22 @@ button[type="submit"]:hover {
 
 .task-item {
   display: flex;
-  justify-content: space-around;
   background-color: #fedada;
-  border-radius: 10px;
-  margin: 1rem;
+  justify-content: space-around;
+  border-radius: 4px;
+  width: 70%;
+  margin: 1rem auto;
 }
 
 .task-item  h1, h2, p{
-  font-size: 24px;
-  font-family: "Inter", Helvetica, sans-serif;
-  padding: 8px;
+  font-size: 20px;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  padding: 10px;
+  width: 70%;
 }
 
 
-.descBtn {
+/* .descBtn {
   display: inline-block;
   outline: 0;
   cursor: pointer;
@@ -307,4 +310,4 @@ button[type="submit"]:hover {
       background-color: #ff4742;
       color: #fff;
   }
-}
+} */
