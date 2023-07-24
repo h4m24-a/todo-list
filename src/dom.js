@@ -315,6 +315,7 @@ function renderTasks() {
     let task = myTask[i];
     let taskItemDiv = document.createElement("div");
     taskItemDiv.classList.add("task-item"); 
+    
 
     // Set the color based on the priority level
     let color;
@@ -325,7 +326,7 @@ function renderTasks() {
     } else if (task.priority === "High") {
       color = "#EA5457";
     } else {
-      color = "white"; // Default color if priority level is not recognized
+      color = "white"; 
     }
 
     taskItemDiv.style.backgroundColor = color;
@@ -344,9 +345,25 @@ function renderTasks() {
       <button class="remove-button"><i class="fa-solid fa-trash fa-lg" style="color: #000000;"></i></button>
     `;
 
+     // Add event listeners for "edit" and "remove" buttons here
+    const editButton = taskItemDiv.querySelector(".edit-button");
+    const removeButton = taskItemDiv.querySelector(".remove-button");
+
+    editButton.addEventListener("click", () => {
+      editTask(i);
+    });
+
+    removeButton.addEventListener("click", () => {
+      removeTask(i);
+    });
+
+    
+
     taskItemsDiv.appendChild(taskItemDiv); 
   }
 }
+
+
 
 
 // Submit button
@@ -370,9 +387,36 @@ function clearTaskForm() {
 
 
 // Remove Button
+function removeTask(index) {
+  myTask.splice(index, 1);
+  renderTasks(); // Re-render tasks to update the view
+}
 
 
+// Edit Button
+function editTask(index) {
+  const task = myTask[index];
+  // Populate the form with the task details for editing
+  document.querySelector('input[name="taskTitle"]').value = task.title;
+  document.querySelector('textarea[name="taskDescription"]').value = task.description;
+  document.querySelector('input[name="taskDate"]').value = task.date;
+  document.querySelector('select[name="taskPriority"]').value = task.priority;
 
+  // Show the form with the pre-filled data
+  taskForm.style.display = "block";
+
+  // Remove the original task from the myTask array
+  myTask.splice(index, 1);
+
+
+  // Submit button to save the edited task
+  projectForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    addItemsToTask();
+    renderTasks();
+    clearTaskForm();
+  });
+}
 
 renderTasks();
 
