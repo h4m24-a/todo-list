@@ -213,6 +213,8 @@ const createUI = () => {
   const project2 = new Project("Chores");
   myProject.push(project2);
 
+  const project3 = new Project("Prepare for trip")
+  myProject.push(project3)
 
 
   const projectItemsDiv = document.createElement("div");
@@ -222,10 +224,19 @@ const createUI = () => {
   function renderProjects() {
     // Get the projectItemsDiv from the DOM
     const projectItemsDiv = document.querySelector(".project-items");
-    projectItemsDiv.innerHTML = myProject
-      .map((project) => `<div class="navText">${project.title}</div>`)
-      .join("");
+    
+    // Clear the existing project items from the projectItemsDiv otherwise it adds the previous entry
+    projectItemsDiv.innerHTML = "";
+
+  // Append a new div for each project
+  for (let i = 0; i < myProject.length; i++) {
+    let project = myProject[i];
+    let newProjectDiv = document.createElement("div");
+    newProjectDiv.classList.add("projectText");
+    newProjectDiv.textContent = project.title;
+    projectItemsDiv.appendChild(newProjectDiv);
   }
+}
 
 
 
@@ -243,9 +254,86 @@ const createUI = () => {
 
 
 
-  // Add Task Function 
-  const taskDiv = document.createElement("div");
-  taskDiv.classList.add("taskDiv");
+  
+
+
+// Add Task Function 
+const taskDiv = document.createElement("div");
+taskDiv.classList.add("taskDiv");
+
+let myTask = [];
+
+class Task {
+  constructor (title, description, date, priority) {
+    this.title = title;
+    this.description = description;
+    this.date = date;
+    this.priority = priority;
+  }
+}
+
+
+
+// Example Tasks
+
+const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low"  );
+  myTask.push(task1);
+
+function addItemsToTask() {
+  let title = document.querySelector('input[name="taskTitle"]').value;
+  let description = document.querySelector('textarea[name="taskDescription"]').value;
+  let date = document.querySelector('input[name="taskDate"]').value;
+  let priority = document.querySelector('select[name="taskPriority"]').value;
+  let newTask = new Task(title, description, date, priority);
+  myTask.push(newTask);
+}
+
+const taskItemsDiv = document.createElement("div");
+taskItemsDiv.classList.add("task-items");
+taskDiv.appendChild(taskItemsDiv);
+
+// Render Tasks
+function renderTasks() {
+  taskItemsDiv.innerHTML = ''; // Clear the existing tasks
+
+  for (let i = 0; i < myTask.length; i++) {
+    let task = myTask[i];
+    let taskItemDiv = document.createElement("div");
+    taskItemDiv.classList.add("task-item"); 
+
+    taskItemDiv.innerHTML = 
+    ` <h1>${task.title}</h1>
+      <h2>${task.description}</h2>
+      <p>${task.date}</p>
+      <p>${task.priority}</p>
+    `;
+
+    taskItemsDiv.appendChild(taskItemDiv); 
+  }
+}
+
+// Submit button
+taskForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  addItemsToTask();
+  renderTasks();
+  clearTaskForm();
+});
+
+// Clears form after Task is submitted
+function clearTaskForm() {
+  document.querySelector('input[name="taskTitle"]').value = "";
+  document.querySelector('textarea[name="taskDescription"]').value = "";
+  document.querySelector('input[name="taskDate"]').value = "";
+  document.querySelector('select[name="taskPriority"]').value = "Low";
+  taskForm.style.display = "none";
+}
+
+
+
+
+renderTasks();
+
 
   content.appendChild(mainContent);
   content.appendChild(taskDiv)

@@ -9,7 +9,7 @@
 }
 
 #content {
-  margin-left: 400px;
+  margin-left: 310px;
 }
 
 
@@ -28,12 +28,12 @@ body {
   top: 0;
   bottom: 0;
   width: 300px;
-  background-color: #258ef0;
+  background-color: #10141f;
 }
 
 /* Style for each tab */
 .navText {
-  color: #fff;
+  color: #c5cbd2;
   text-decoration: none;
   font-size: 24px;;
   font-family: "Poppins", Helvetica, sans-serif;
@@ -42,8 +42,7 @@ body {
 }
 
 .navText:hover {
-  background-color: white;
-  color: black;
+  color: white;
 }
 
 
@@ -53,15 +52,17 @@ body {
   color: black;
   margin-bottom: 15px;
   border-bottom: 1px solid gainsboro;
+  color: white;
 }
 
 
 #project-button {
   font-family: "Poppins";
   font-size: 28px;
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-bottom: 15px;
   border-bottom: 1px solid gainsboro;
+  color: white;
 
 }
 
@@ -93,6 +94,7 @@ body {
   line-height: 20px;
   overflow: visible;
   padding: 12px 40px;
+  font-family: 'Poppins', Verdana, sans-serif;
 }
 
 .add-task-button:focus {
@@ -256,18 +258,32 @@ button[type="submit"]:hover {
 
 
 .projectText {
-  color: #ffffff;
+  color: white;
   text-decoration: none;
-  font-size: 24px;;
+  font-size: 24px;
   font-family: "Poppins", Helvetica, sans-serif;
   cursor: pointer;
-  text-align: center;
+  padding: 10px;
+}
+
+.projectText:hover {
+  color: #3279d6;
 }
 
 
 .taskDiv {
   margin-top: 4rem;
-  border: solid 2px red;
+  border: solid 1px red;
+}
+
+.task-item {
+  border: solid 1px blue;
+  display: flex;
+  justify-content: space-around;
   height: 100%;
 }
 
+.task-item  h1{
+  font-size: 30px;
+  font-family: "Inter", Helvetica, sans-serif;
+}
