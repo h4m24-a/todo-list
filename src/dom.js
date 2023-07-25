@@ -209,14 +209,19 @@ const createUI = () => {
 
 
 
-  const project1 = new Project("Grocery");
+  const project1 = new Project("Default Tasks");
   myProject.push(project1);
 
-  const project2 = new Project("Chores");
+  const project2 = new Project("Grocery");
   myProject.push(project2);
 
-  const project3 = new Project("Prepare for trip")
-  myProject.push(project3)
+  const project3 = new Project("Chores");
+  myProject.push(project3);
+
+  const project4 = new Project("Prepare for trip")
+  myProject.push(project4)
+
+  
 
 
   const projectItemsDiv = document.createElement("div");
@@ -279,14 +284,25 @@ class Task {
 
 
 // Example Tasks
-  const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low", "Prepare for trip"  );
+  const task1 = new Task("Task 1", "Gather passports", "2023-07-01", "High", "Prepare for trip"  );
   myTask.push(task1);
 
-  const task2 = new Task("Task 2", "Task 2 Description", "2023-07-01", "Medium", "Grocery"  );
+  const task2 = new Task("Task 2", "Buy Milk.", "2023-07-01", "Medium", "Grocery"  );
   myTask.push(task2)
 
-  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-15", "High", "Chores"  );
+  const task3 = new Task("Task 3", "Clean bedroom", "2023-07-15", "Low", "Chores"  );
   myTask.push(task3)
+
+  const task4 = new Task("Task 4", "Pack Suitcases", "2023-10-01", "High", "Prepare for trip"  );
+  myTask.push(task4);
+
+  const task5 = new Task("Task 5", "Buy Eggs", "2023-10-01", "Low", "Grocery"  );
+  myTask.push(task5);
+
+  const task6 = new Task("Task 6", "Wash dishes", "2023-12-01", "Medium", "Chores"  );
+  myTask.push(task6);
+
+
 
 
 
@@ -325,9 +341,9 @@ function renderTasks() {
     if (task.priority === "Low") {
       color = "#d1eaee";
     } else if (task.priority === "Medium") {
-      color = "#fedada";
+      color = "#fff573";
     } else if (task.priority === "High") {
-      color = "#EA5457";
+      color = "#f5aeaa";
     } else {
       color = "white"; 
     }
@@ -457,9 +473,71 @@ function renderProjectOptions() {
 const projectSelect = populateProjectOptions();
 taskForm.appendChild(projectSelect);
 
-
-
 taskForm.appendChild(submitButton);
+
+
+
+
+
+// Filter projects by name
+function setupProjectFilter() {
+  // Function to filter tasks by project name
+  function filterTasksByProject(projectName) {
+    return myTask.filter((task) => task.project === projectName);
+  }
+
+  // Function to render tasks based on the filtered tasks
+  function renderFilteredTasks(tasks) {
+    taskItemsDiv.innerHTML = ""; // Clear the existing tasks
+
+    for (const task of tasks) {
+      const taskItemDiv = document.createElement("div");
+      taskItemDiv.classList.add("task-item");
+
+      // Set the color based on the priority level
+      let color;
+      if (task.priority === "Low") {
+        color = "#d1eaee";
+      } else if (task.priority === "Medium") {
+        color = "#fff573";
+      } else if (task.priority === "High") {
+        color = "#f5aeaa";
+      } else {
+        color = "white"; 
+      }
+      taskItemDiv.style.backgroundColor = color;
+
+      // Date format
+      const formattedDate = format(new Date(task.date), "MMM do - yyyy");
+
+      taskItemDiv.innerHTML = `
+        <h1>${task.title}</h1>
+        <h2>${task.description}</h2>
+        <p>${formattedDate}</p>
+        <p>${task.priority}</p>
+        <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></button>
+        <button class="remove-button"><i class="fa-solid fa-trash fa-lg" style="color: #000000;"></i></button>
+      `;
+
+      taskItemsDiv.appendChild(taskItemDiv);
+    }
+  }
+
+  // Add event listener to each project item so you can click.
+  const projectItems = document.querySelectorAll(".projectText");
+  projectItems.forEach((projectItem, index) => {
+    projectItem.dataset.index = index; // Store the project index as a dataset attribute
+    projectItem.addEventListener("click", function () {
+      const selectedProject = myProject[index];
+      const filteredTasks = filterTasksByProject(selectedProject.title);
+      renderFilteredTasks(filteredTasks);
+    });
+  });
+}
+
+// Call the setupProjectFilter function to set up the project filter functionality
+setupProjectFilter();
+
 
 
 renderTasks();
