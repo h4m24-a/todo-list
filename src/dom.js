@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 
-
 const createUI = () => {
   const content = document.querySelector("#content");
   const navDiv = document.createElement("div");
@@ -122,7 +121,7 @@ const createUI = () => {
   taskForm.appendChild(descriptionInput);
   taskForm.appendChild(datePicker);
   taskForm.appendChild(priorityLevel);
-  taskForm.appendChild(submitButton);
+  
 
   // Append the button and form to the mainContent div
   mainContent.appendChild(addTaskButton);
@@ -249,6 +248,7 @@ const createUI = () => {
     addItemToProject();
     renderProjects();
     projectForm.reset();
+    renderProjectOptions();
   });
 
 
@@ -267,24 +267,25 @@ taskDiv.classList.add("taskDiv");
 let myTask = [];
 
 class Task {
-  constructor (title, description, date, priority) {
+  constructor (title, description, date, priority, project) {
     this.title = title;
     this.description = description;
     this.date = date;
     this.priority = priority;
+    this.project = project;
   }
 }
 
 
 
 // Example Tasks
-  const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low"  );
+  const task1 = new Task("Task 1", "Task 1 Description", "2023-07-01", "Low", "Prepare for trip"  );
   myTask.push(task1);
 
-  const task2 = new Task("Task 2", "Task 2 Description", "2023-07-01", "Medium"  );
+  const task2 = new Task("Task 2", "Task 2 Description", "2023-07-01", "Medium", "Grocery"  );
   myTask.push(task2)
 
-  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-15", "High"  );
+  const task3 = new Task("Task 3", "Task 3 Description", "2023-07-15", "High", "Chores"  );
   myTask.push(task3)
 
 
@@ -296,7 +297,9 @@ function addItemsToTask() {
   let description = document.querySelector('textarea[name="taskDescription"]').value;
   let date = document.querySelector('input[name="taskDate"]').value;
   let priority = document.querySelector('select[name="taskPriority"]').value;
-  let newTask = new Task(title, description, date, priority);
+  let project = document.querySelector('select[name="taskProject"]').value; // Get the selected project
+
+  let newTask = new Task(title, description, date, priority, project); // Include the project in the Task constructor
   myTask.push(newTask);
 }
 
@@ -341,6 +344,7 @@ function renderTasks() {
       <h2>${task.description}</h2>
       <p>${formattedDate}</p>
       <p>${task.priority}</p>
+      <p>${task.project}</p>
       <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></button>
       <button class="remove-button"><i class="fa-solid fa-trash fa-lg" style="color: #000000;"></i></button>
     `;
@@ -372,6 +376,9 @@ taskForm.addEventListener("submit", function (event) {
   addItemsToTask();
   renderTasks();
   clearTaskForm();
+
+  const projectSelect = document.querySelector('select[name="taskProject"]');
+  projectSelect.value = "";
 });
 
 
@@ -383,6 +390,7 @@ function clearTaskForm() {
   document.querySelector('input[name="taskDate"]').value = "";
   document.querySelector('select[name="taskPriority"]').value = "Low";
   taskForm.style.display = "none";
+  projectSelect.value = "";
 }
 
 
@@ -401,6 +409,7 @@ function editTask(index) {
   document.querySelector('textarea[name="taskDescription"]').value = task.description;
   document.querySelector('input[name="taskDate"]').value = task.date;
   document.querySelector('select[name="taskPriority"]').value = task.priority;
+  document.querySelector('select[name="taskProject"]').value = task.project
 
   // Show the form with the pre-filled data
   taskForm.style.display = "block";
@@ -412,11 +421,52 @@ function editTask(index) {
 
 
 
+// Selecting projects to insert tasks into on Add Task Form
+function populateProjectOptions() {
+  const projectSelect = document.createElement("select");
+  projectSelect.name = "taskProject";
+  projectSelect.required = true;
+
+  // Add default "No Project" option
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "No Project";
+  projectSelect.appendChild(defaultOption);
+
+  // Add project options from the myProject array
+  for (const project of myProject) {
+    const projectOption = document.createElement("option");
+    projectOption.value = project.title;
+    projectOption.textContent = project.title;
+    projectSelect.appendChild(projectOption);
+  }
+
+  return projectSelect;
+}
+
+// Function to render the project options in the select element
+function renderProjectOptions() {
+  const projectSelect = document.querySelector('select[name="taskProject"]');
+  const newProjectSelect = populateProjectOptions();
+
+  // Replace the old select element with the new one
+  projectSelect.replaceWith(newProjectSelect);
+}
+
+// Append the initial project select element to the taskForm
+const projectSelect = populateProjectOptions();
+taskForm.appendChild(projectSelect);
+
+
+
+taskForm.appendChild(submitButton);
+
+
 renderTasks();
 
 
-  content.appendChild(mainContent);
-  content.appendChild(taskDiv)
+content.appendChild(mainContent);
+content.appendChild(taskDiv)
 };
 
 export default createUI;
