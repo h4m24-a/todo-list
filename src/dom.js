@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
 
 const createUI = () => {
@@ -13,28 +12,24 @@ const createUI = () => {
   // Tabs
   const taskText = document.createElement("div");
   const allTasks = document.createElement("div");
-  const thisWeek = document.createElement("div");
   const upcoming = document.createElement("div");
   const projectText = document.createElement("div");
   const addProjectButton = document.createElement("div");
 
   taskText.setAttribute("id", "task-button");
   allTasks.setAttribute("id", "alltask-button");
-  thisWeek.setAttribute("id", "thisweek-button");
   upcoming.setAttribute("id", "upcmoming-button");
   projectText.setAttribute("id", "project-button");
   addProjectButton.setAttribute("id", "addproject-button");
 
   // Setting classes
   allTasks.classList.add("navText");
-  thisWeek.classList.add("navText");
   upcoming.classList.add("navText");
   addProjectButton.classList.add("navText");
 
   // Text of tabs
   taskText.textContent = "Task";
   allTasks.innerHTML = `<i class="fa-solid fa-calendar-day fa-lg" style="color: #dfda34;"></i>All Tasks`;
-  thisWeek.innerHTML = `<i class="fa-solid fa-calendar-week fa-lg" style="color: #1dd790;"></i>This Week`;
   upcoming.innerHTML = `<i class="fa-regular fa-calendar-days fa-lg" style="color: #2ea4d6;"></i>Upcoming`;
   projectText.textContent = "Projects";
   addProjectButton.textContent = "+ Add Project";
@@ -43,14 +38,12 @@ const createUI = () => {
   content.appendChild(navbar);
   navDiv.appendChild(taskText);
   navDiv.appendChild(allTasks);
-  navDiv.appendChild(thisWeek);
   navDiv.appendChild(upcoming);
   navDiv.appendChild(projectText);
   navDiv.appendChild(addProjectButton);
 
   navbar.appendChild(taskText);
   navbar.appendChild(allTasks);
-  navbar.appendChild(thisWeek);
   navbar.appendChild(upcoming);
   navbar.appendChild(projectText);
   navbar.appendChild(addProjectButton);
@@ -560,14 +553,61 @@ allTasks.addEventListener("click", function() {
 
 
 
-function displayThisWeekTab() {
+
+function displayUpcomingTasksTab() {
+  const currentDate = new Date();
+
+  const filteredTasks = myTask.filter((task) => {
+    const taskDate = new Date(task.date);
+    return taskDate > currentDate;
+  });
+
+  // Clear the existing tasks
+  taskItemsDiv.innerHTML = "";
+
+  if (filteredTasks.length === 0) {
+    taskItemsDiv.innerHTML = "<p>No upcoming tasks.</p>";
+  } else {
+    for (const task of filteredTasks) {
+      const taskItemDiv = document.createElement("div");
+      taskItemDiv.classList.add("task-item");
+
+      // Set the color based on the priority level
+      let color;
+      if (task.priority === "Low") {
+        color = "#d1eaee";
+      } else if (task.priority === "Medium") {
+        color = "#fff573";
+      } else if (task.priority === "High") {
+        color = "#f5aeaa";
+      } else {
+        color = "white";
+      }
+      taskItemDiv.style.backgroundColor = color;
+
+      // Date format
+      const formattedDate = format(new Date(task.date), "MMM do - yyyy");
+
+      taskItemDiv.innerHTML = `
+        <h1>${task.title}</h1>
+        <h2>${task.description}</h2>
+        <p>${formattedDate}</p>
+        <p>${task.priority}</p>
+        <p>${task.project}</p>
+        <button class="edit-button"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></button>
+        <button class="remove-button"><i class="fa-solid fa-trash fa-lg" style="color: #000000;"></i></button>
+      `;
+
+      taskItemsDiv.appendChild(taskItemDiv);
+    }
+  }
+
 }
 
-thisWeek.addEventListener("click", function() {
-  displayThisWeekTab()
-  projectDisplay.textContent = "This Week";
-})
-
+upcoming.addEventListener("click", function () {
+  displayUpcomingTasksTab();
+  projectDisplay.textContent = "Upcoming";
+});
 
 renderTasks();
 
