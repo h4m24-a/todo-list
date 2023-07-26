@@ -601,7 +601,6 @@ function displayUpcomingTasksTab() {
       taskItemsDiv.appendChild(taskItemDiv);
     }
   }
-
 }
 
 upcoming.addEventListener("click", function () {
