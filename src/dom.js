@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
+
 
 const createUI = () => {
   const content = document.querySelector("#content");
@@ -52,8 +54,6 @@ const createUI = () => {
   navbar.appendChild(upcoming);
   navbar.appendChild(projectText);
   navbar.appendChild(addProjectButton);
-
-
 
 
 
@@ -546,6 +546,27 @@ function setupProjectFilter() {
 // Call the setupProjectFilter function to set up the project filter functionality
 setupProjectFilter();
 
+
+
+// Tabs Filter 
+function displayAllTasksTab() {
+  renderTasks()
+}
+
+allTasks.addEventListener("click", function() {
+  displayAllTasksTab()
+  projectDisplay.textContent = "All Tasks";
+})
+
+
+
+function displayThisWeekTab() {
+}
+
+thisWeek.addEventListener("click", function() {
+  displayThisWeekTab()
+  projectDisplay.textContent = "This Week";
+})
 
 
 renderTasks();
