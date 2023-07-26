@@ -281,6 +281,11 @@ class Task {
   }
 }
 
+const projectDisplay = document.createElement("h2");
+  projectDisplay.id = "projectDisplay";
+  
+  taskDiv.appendChild(projectDisplay)
+
 
 
 // Example Tasks
@@ -532,6 +537,7 @@ function setupProjectFilter() {
     projectItem.addEventListener("click", function () {
       const selectedProject = myProject[index];
       const filteredTasks = filterTasksByProject(selectedProject.title);
+      projectDisplay.textContent = selectedProject.title;
       renderFilteredTasks(filteredTasks);
     });
   });
@@ -543,6 +549,7 @@ setupProjectFilter();
 
 
 renderTasks();
+
 
 
 content.appendChild(mainContent);
