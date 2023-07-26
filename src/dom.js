@@ -31,9 +31,9 @@ const createUI = () => {
 
   // Text of tabs
   taskText.textContent = "Task";
-  allTasks.textContent = "All Tasks";
-  thisWeek.textContent = "This Week";
-  upcoming.textContent = "Upcoming";
+  allTasks.innerHTML = `<i class="fa-solid fa-calendar-day fa-lg" style="color: #dfda34;"></i>All Tasks`;
+  thisWeek.innerHTML = `<i class="fa-solid fa-calendar-week fa-lg" style="color: #1dd790;"></i>This Week`;
+  upcoming.innerHTML = `<i class="fa-regular fa-calendar-days fa-lg" style="color: #2ea4d6;"></i>Upcoming`;
   projectText.textContent = "Projects";
   addProjectButton.textContent = "+ Add Project";
 
@@ -302,6 +302,9 @@ class Task {
   const task6 = new Task("Task 6", "Wash dishes", "2023-12-01", "Medium", "Chores"  );
   myTask.push(task6);
 
+  const task7 = new Task("Example", "Go to the store", "2023-12-01", "Low", "Default Tasks"  );
+  myTask.push(task7);
+
 
 
 
@@ -489,7 +492,6 @@ function setupProjectFilter() {
   // Function to render tasks based on the filtered tasks
   function renderFilteredTasks(tasks) {
     taskItemsDiv.innerHTML = ""; // Clear the existing tasks
-
     for (const task of tasks) {
       const taskItemDiv = document.createElement("div");
       taskItemDiv.classList.add("task-item");
@@ -523,7 +525,7 @@ function setupProjectFilter() {
     }
   }
 
-  // Add event listener to each project item so you can click.
+  // Add event listener to each project item.
   const projectItems = document.querySelectorAll(".projectText");
   projectItems.forEach((projectItem, index) => {
     projectItem.dataset.index = index; // Store the project index as a dataset attribute
