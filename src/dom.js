@@ -201,7 +201,6 @@ const createUI = () => {
   }
 
 
-
   const project1 = new Project("Default Tasks");
   myProject.push(project1);
 
@@ -247,6 +246,9 @@ const createUI = () => {
     renderProjects();
     projectForm.reset();
     renderProjectOptions();
+  
+     // Re-setup the project filter functionality after adding a new project
+     setupProjectFilter();
   });
 
 
