@@ -247,7 +247,6 @@ const createUI = () => {
     projectForm.reset();
     renderProjectOptions();
   
-     // Re-setup the project filter functionality after adding a new project
      setupProjectFilter();
   });
 
@@ -316,9 +315,9 @@ function addItemsToTask() {
   let description = document.querySelector('textarea[name="taskDescription"]').value;
   let date = document.querySelector('input[name="taskDate"]').value;
   let priority = document.querySelector('select[name="taskPriority"]').value;
-  let project = document.querySelector('select[name="taskProject"]').value; // Get the selected project
+  let project = document.querySelector('select[name="taskProject"]').value;
 
-  let newTask = new Task(title, description, date, priority, project); // Include the project in the Task constructor
+  let newTask = new Task(title, description, date, priority, project); 
   myTask.push(newTask);
 }
 
@@ -440,19 +439,13 @@ function editTask(index) {
 
 
 
-// Selecting projects to insert tasks into on Add Task Form
-function populateProjectOptions() {
+// Select dropdown on Add Task Form
+function createProjectSelect() {
   const projectSelect = document.createElement("select");
   projectSelect.name = "taskProject";
   projectSelect.required = true;
+  projectSelect.innerHTML = '<option value="">No Project</option>';
 
-  // Add default "No Project" option
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "No Project";
-  projectSelect.appendChild(defaultOption);
-
-  // Add project options from the myProject array
   for (const project of myProject) {
     const projectOption = document.createElement("option");
     projectOption.value = project.title;
@@ -463,27 +456,23 @@ function populateProjectOptions() {
   return projectSelect;
 }
 
-// Function to render the project options in the select element
 function renderProjectOptions() {
-  const projectSelect = document.querySelector('select[name="taskProject"]');
-  const newProjectSelect = populateProjectOptions();
-
-  // Replace the old select element with the new one
-  projectSelect.replaceWith(newProjectSelect);
+  const projectSelect = createProjectSelect();
+  const oldProjectSelect = document.querySelector('select[name="taskProject"]');
+  oldProjectSelect.replaceWith(projectSelect);
 }
 
-// Append the initial project select element to the taskForm
-const projectSelect = populateProjectOptions();
-taskForm.appendChild(projectSelect);
-
+taskForm.appendChild(createProjectSelect());
 taskForm.appendChild(submitButton);
 
 
 
 
 
-// Filter projects by name
+
+
 function setupProjectFilter() {
+
   // Function to filter tasks by project name
   function filterTasksByProject(projectName) {
     return myTask.filter((task) => task.project === projectName);
@@ -536,10 +525,13 @@ function setupProjectFilter() {
       renderFilteredTasks(filteredTasks);
     });
   });
+
 }
 
-// Call the setupProjectFilter function to set up the project filter functionality
+
 setupProjectFilter();
+
+
 
 
 
