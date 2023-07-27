@@ -603,6 +603,7 @@ upcoming.addEventListener("click", function () {
 });
 
 renderTasks();
+projectDisplay.textContent = "All Tasks";
 
 
 
