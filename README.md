@@ -7,6 +7,7 @@ Todo List built using JavaScript, CSS & Webpack
  - Filter todos by project
  - View all todos and Upcoming todos
  - Edit and Remove todos
- - Create new projects & chose which project new todos go into.
+ - Create new projects & chose which project new todos go into
  - Different coloured priority levels
+ - Mobile responsive
 
