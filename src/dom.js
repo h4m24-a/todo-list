@@ -607,6 +607,22 @@ projectDisplay.textContent = "All Tasks";
 
 
 
+const hamburger = document.querySelector('.hamburger-menu');
+let isNavDivVisible = false;
+
+hamburger.addEventListener("click", function() {
+  hamburger.classList.toggle('active');
+
+  if (isNavDivVisible) {
+    navDiv.style.display = "none";
+    isNavDivVisible = false;
+  } else {
+    navDiv.style.display = "block";
+    isNavDivVisible = true;
+  }
+});
+
+
 content.appendChild(mainContent);
 content.appendChild(taskDiv)
 };
