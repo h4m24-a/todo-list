@@ -622,6 +622,19 @@ hamburger.addEventListener("click", function() {
   }
 });
 
+function windowSize() {
+  if (window.innerWidth >= 768) {
+    navDiv.style.display = "block";
+    isNavDivVisible = true;
+  } else {
+    navDiv.style.display = "none";
+    isNavDivVisible = false;
+  }
+}
+
+// Call the function initially and add an event listener to update on window resize
+windowSize();
+window.addEventListener("resize", windowSize);
 
 content.appendChild(mainContent);
 content.appendChild(taskDiv)

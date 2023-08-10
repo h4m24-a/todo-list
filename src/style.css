@@ -217,8 +217,8 @@ button[type="submit"]:hover {
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  max-width: 310px; /* Set the maximum width of the form */
-  width: 50%; /* Set the width of the form */
+  max-width: 310px; 
+  width: 50%; 
 }
 
 .project-form input,
@@ -360,6 +360,10 @@ i {
     margin-left: 250px;
   }
 
+  .navDiv {
+    display: block;
+  }
+
   .task-form {
     top: 20%;
     width: 30%;
@@ -397,6 +401,7 @@ i {
 
   .navDiv {
     width: 250px;
+    display: flex;
   }
 
   .task-item {
@@ -429,16 +434,6 @@ i {
 
   .navDiv {
     display: none;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 300px;
-    background-color: #10141f;
-   
   }
 
   .navText {
@@ -513,15 +508,15 @@ i {
   }
 
   .task-item  h1, h2, p{
-    font-size: 16px;
-    padding: 4px;
-    width: 40%;
+    font-size: 13px;
+    padding: 3px;
+    width: 60%;
     height: 100%;
   }
 
 
   .edit-button, .remove-button {
-    font-size: 1.2rem;
+    font-size: 13px;
     height: 30px;
     outline: none;
     margin: 2px;
