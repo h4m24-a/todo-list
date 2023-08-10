@@ -617,7 +617,7 @@ hamburger.addEventListener("click", function() {
     navDiv.style.display = "none";
     isNavDivVisible = false;
   } else {
-    navDiv.style.display = "block";
+    navDiv.style.display = "flex";
     isNavDivVisible = true;
   }
 });
