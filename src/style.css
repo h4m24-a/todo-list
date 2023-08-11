@@ -434,20 +434,13 @@ i {
 
   .navDiv {
     display: none;
+    width: 280px;
   }
 
-  .navText {
-    color: #c5cbd2;
-    text-decoration: none;
-    font-size: 24px;
-    font-family: "Poppins", Helvetica, sans-serif;
-    cursor: pointer;
-    padding: 8px;
+  #task-button {
+    padding-top: 3rem;
   }
 
-  .navText:hover {
-    color: white;
-  }
 
   .hamburger-menu {
     display: block;
@@ -478,13 +471,8 @@ i {
     transform: rotate(45deg) translate(-6px, -6px);
   }
 
-  .navDiv {
-    width: 250px;
-  }
-
   .task-item {
     width: 100%;
-
   }
 }
 

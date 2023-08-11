@@ -606,8 +606,9 @@ renderTasks();
 projectDisplay.textContent = "All Tasks";
 
 
-
 const hamburger = document.querySelector('.hamburger-menu');
+const projectItems = document.querySelectorAll(".projectText");
+const navText = document.querySelectorAll(".navText");
 let isNavDivVisible = false;
 
 hamburger.addEventListener("click", function() {
@@ -622,12 +623,31 @@ hamburger.addEventListener("click", function() {
   }
 });
 
+// Hide the navigation bar when a project or task item is clicked
+projectItems.forEach((projectItem) => {
+  projectItem.addEventListener("click", function() {
+    navDiv.style.display = "none";
+    isNavDivVisible = false;
+  });
+});
+
+
+navText.forEach((navText) => {
+  navText.addEventListener("click", function() {
+    navDiv.style.display = "none";
+    isNavDivVisible = false;
+  });
+});
+
+
 function windowSize() {
   if (window.innerWidth >= 768) {
     navDiv.style.display = "block";
     isNavDivVisible = true;
   } else {
-    navDiv.style.display = "none";
+    if (!isNavDivVisible) {
+      navDiv.style.display = "none";
+    }
     isNavDivVisible = false;
   }
 }
