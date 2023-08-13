@@ -606,39 +606,27 @@ renderTasks();
 projectDisplay.textContent = "All Tasks";
 
 
+
+// Mobile menu
 const hamburger = document.querySelector('.hamburger-menu');
 const projectItems = document.querySelectorAll(".projectText");
 const navText = document.querySelectorAll(".navText");
 let isNavDivVisible = false;
 
-hamburger.addEventListener("click", function() {
-  hamburger.classList.toggle('active');
-
-  if (isNavDivVisible) {
+function hideNavDiv() {
+  if (window.innerWidth < 768) {
     navDiv.style.display = "none";
     isNavDivVisible = false;
-  } else {
-    navDiv.style.display = "flex";
-    isNavDivVisible = true;
   }
-});
+}
 
-// Hide the navigation bar when a project or task item is clicked
 projectItems.forEach((projectItem) => {
-  projectItem.addEventListener("click", function() {
-    navDiv.style.display = "none";
-    isNavDivVisible = false;
-  });
+  projectItem.addEventListener("click", hideNavDiv);
 });
 
-
-navText.forEach((navText) => {
-  navText.addEventListener("click", function() {
-    navDiv.style.display = "none";
-    isNavDivVisible = false;
-  });
+navText.forEach((navLink) => {
+  navLink.addEventListener("click", hideNavDiv);
 });
-
 
 function windowSize() {
   if (window.innerWidth >= 768) {
@@ -652,9 +640,22 @@ function windowSize() {
   }
 }
 
-// Call the function initially and add an event listener to update on window resize
+// Calling the function initially and add an event listener to update on window resize
 windowSize();
 window.addEventListener("resize", windowSize);
+
+hamburger.addEventListener("click", function() {
+  hamburger.classList.toggle('active');
+
+  if (isNavDivVisible) {
+    navDiv.style.display = "none";
+    isNavDivVisible = false;
+  } else {
+    navDiv.style.display = "flex";
+    isNavDivVisible = true;
+  }
+});
+
 
 content.appendChild(mainContent);
 content.appendChild(taskDiv)
